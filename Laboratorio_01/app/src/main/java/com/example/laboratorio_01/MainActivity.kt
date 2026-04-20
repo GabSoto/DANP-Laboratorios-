@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -18,7 +19,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-//import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,7 +32,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.laboratorio_01.ui.theme.Laboratorio_01Theme
+import androidx.compose.foundation.lazy.items
+import com.example.laboratorio_01.ui.theme.Laboratorio_01Theme // Para el listOf
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    EjercicioDos()
+                    EjercicioTres()
                 }
             }
         }
@@ -53,7 +54,6 @@ class MainActivity : ComponentActivity() {
 
 
 // PRIMER EJERCICIO
-
 @Composable
 fun EjercicioUno() {
     var mensaje by remember { mutableStateOf("¡Presiona el botón de abajo!") }
@@ -167,5 +167,43 @@ fun EjercicioDos() {
             profesor = "Ing. Carlos Perez",
             grupo = "B"
         )
+    }
+}
+
+// TERCER EJERCICIO
+@Composable
+fun EjercicioTres() {
+    val listaCursos = listOf(
+        listOf("SEGURIDAD INFORMATICA", "Ing. Luis Alberto", "B"),
+        listOf("PROYECTO DE INGENIERIA DE SOFTWARE 1", "Ing. Maria Garcia", "B"),
+        listOf("DESARROLLO AVANZADO EN NUEVAS PLATAFORMAS (E)", "Ing. Carlos Perez", "B"),
+        listOf("SISTEMAS OPERATIVOS", "Ing. Roberto Sanchez", "B"),
+        listOf("BASE DE DATOS II", "Ing. Ana Torres", "B")
+    )
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        Text(
+            text = "EJERCICIO TRES: LazyColumn",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 12.dp)
+        )
+
+        LazyColumn(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            items(listaCursos) { curso ->
+                CursoCard(
+                    nombre = curso[0],
+                    profesor = curso[1],
+                    grupo = curso[2]
+                )
+            }
+        }
     }
 }
