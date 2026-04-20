@@ -8,11 +8,17 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+//import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    EjercicioUno()
+                    EjercicioDos()
                 }
             }
         }
@@ -47,6 +53,7 @@ class MainActivity : ComponentActivity() {
 
 
 // PRIMER EJERCICIO
+
 @Composable
 fun EjercicioUno() {
     var mensaje by remember { mutableStateOf("¡Presiona el botón de abajo!") }
@@ -90,5 +97,75 @@ fun EjercicioUno() {
         ) {
             Text("Haz clic aquí", color = Color.White)
         }
+    }
+}
+
+// SEGUNDO EJERCICIO
+@Composable
+fun CursoCard(nombre: String, profesor: String, grupo: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 16.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
+        )
+    ) {
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Text(
+                text = nombre,
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = Color(0xFF1976D2)
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = "Profesor: $profesor",
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Text(
+                text = "Grupo: $grupo",
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.Gray
+            )
+        }
+    }
+}
+
+@Composable
+fun EjercicioDos() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
+        Text(
+            text = "Mis Cursos Reutilizables",
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        CursoCard(
+            nombre = "SEGURIDAD INFORMATICA",
+            profesor = "Ing. Luis Alberto",
+            grupo = "B"
+        )
+
+        CursoCard(
+            nombre = "PROYECTO DE INGENIERIA DE SOFTWARE 1",
+            profesor = "Ing. Maria Garcia",
+            grupo = "B"
+        )
+
+        CursoCard(
+            nombre = "DESARROLLO AVANZADO EN NUEVAS PLATAFORMAS (E)",
+            profesor = "Ing. Carlos Perez",
+            grupo = "B"
+        )
     }
 }
