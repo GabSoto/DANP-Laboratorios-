@@ -1,0 +1,31 @@
+# --- Android Studio / IntelliJ ---
+.idea/
+*.iml
+.gradle/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+*.hprof
+
+# --- Carpetas de Compilación ---
+# Ignora todas las carpetas 'build' en cualquier profundidad
+build/
+**/build/
+
+# --- Archivos de Sistema ---
+*.DS_Store
+.DS_Store
+Thumbs.db
+
+# --- Archivos Log ---
+*.log
+
+# --- Gradle ---
+.gradle/
+/build/
+
+# --- Otros ---
+captures/
+.externalNativeBuild/
+.cxx/
