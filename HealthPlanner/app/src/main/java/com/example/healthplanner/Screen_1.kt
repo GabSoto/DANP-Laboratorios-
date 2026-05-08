@@ -1,3 +1,5 @@
+package com.example.healthplanner
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -17,13 +19,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.imcapp.Routes
 
 val PurplePrimary = Color(0xFF5D4099)
 val LightCardColor = Color(0xFFF4F3F8)
 
 @Composable
-fun ScreenA(navController: NavController) {
+fun Screen_1(navController: NavController) {
     var isMale by remember { mutableStateOf(true) }
     var height by remember { mutableFloatStateOf(175f) }
     var weight by remember { mutableIntStateOf(70) }
@@ -128,12 +129,13 @@ fun ScreenA(navController: NavController) {
             onClick = {
                 val heightInMeters = height / 100f
                 val calculo = weight / (heightInMeters * heightInMeters)
+                val calculoFormateado = "%.2f".format(java.util.Locale.US, calculo)
 
-                navController.navigate(Routes.screenB + "/${calculo.toInt()}")
+                navController.navigate(Routes.screen_2 + "/${calculoFormateado}")
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(50.dp),
             colors = ButtonDefaults.buttonColors(containerColor = PurplePrimary),
             shape = RoundedCornerShape(28.dp)
         ) {
